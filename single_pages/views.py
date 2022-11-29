@@ -5,7 +5,7 @@ from django.views.generic import ListView
 def landing(request) :
     return render(
         request,
-        'single_page/landing.html'
+        'single_pages/landing.html'
     )
 def about_me(request):
     return render(
