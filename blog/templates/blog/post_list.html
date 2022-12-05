@@ -1,7 +1,17 @@
 {% extends 'blog/base.html' %}
 
 {% block main_area %}
-<h1>Blog {% if category %}<span class="badge bg-secondary">{{ category }}</span>{% endif %}</h1>
+
+  {% if user.is_authenticated %}
+    {% if user.is_superuser or user.is_staff %}
+      <a class="btn btn-info btn-sm float-right" href="/blog/create_post/" role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;New Post</a>
+    {% endif %}
+  {% endif %}
+
+<h1>Blog
+    {% if category %}<span class="badge bg-secondary">{{ category }}</span>{% endif %}
+    {% if tag %}<span class="badge badge-light"><i class="fa-solid fa-user-tag"></i> {{ tag }}({{ tag.post_set.count }})</span>{% endif %}
+</h1>
 
     {% if post_list.exists %}
 
@@ -34,11 +44,10 @@
               {% if p.tags.exists %}
                 <i class="fa-solid fa-tags"></i>
                 {% for tag in p.tags.iterator %}
-                  <a href="{{ tag.get_absolute_url }}">
-                    <span class="badge text-bg-success">{{ tag }}</span></a>
+                    <a href="{{ tag.get_absolute_url }}">
+                        <span class="badge text-bg-success">{{ tag }}</span></a>
                 {% endfor %}
-                <br />
-                <br />
+                <br /><br />
               {% endif %}
 
               <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read More &rarr;</a>
