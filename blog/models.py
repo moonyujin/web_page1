@@ -46,6 +46,8 @@ class Post(models.Model) :
 
     tags = models.ManyToManyField(Tag, blank=True)
 
+   
+
     def __str__(self):
         return f'[{self.pk}] {self.title} :: {self.author}'
 
@@ -68,8 +70,15 @@ class Comment(models.Model):
     created_at  = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return f'{self.author}::{self.content}'
 
     def get_absolute_url(self):
         return f'{self.post.get_absolute_url()}#comment-{self.pk}'
+
+    def get_avatar_url(self):
+        if self.author.socialaccount_set.exists():
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else:
+            return 'https://ui-avatars.com/api/?background=0D8ABC&color=fff'

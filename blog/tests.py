@@ -451,7 +451,7 @@ class TestView(TestCase) :
         comment_area = soup.find('div', id='comment-area')
         self.assertNotIn('트럼프의 댓글입니다.', comment_area.text)
 
-        self.assertEqual(comment.objects.count(), 1)
+        self.assertEqual(Comment.objects.count(), 1)
         self.assertEqual(self.post_001.comment_set.count(), 1)
 
     def test_search(self):
