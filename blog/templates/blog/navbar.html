@@ -31,14 +31,14 @@
         <!-- 로그아웃 //-->
         {% if user.is_authenticated %}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {% if user.socialaccount_set.all.0.get_avatar_url %}
-            <img class="rounded-circle" width="25px" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="">
-          {% else %}
-            <img class="rounded-circle" src="http://gdimg.gmarket.co.kr/2152823407/still/600?ver=1658321703" width="100px"
-          {% endif %}
+          <a class="nav-link dropdown-toggle" href='#' id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% if user.socialaccount_set.all.0.get_avatar_url %}
+              <img class="rounded-circle" width="25px" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="">
+            {% else %}
+              <img class="rounded-circle" width="50px" src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMTNfMjYw%2FMDAxNjY4MzQ4MzQxMDUy.hVzuTcBgXp3U0kv3L-G_FIHblg5MV9UJNy8yRVHNheUg.PXcbkSqvW8Jpafy5pGVeyz6nQdcyQuKPaLuzb8h3P3gg.JPEG.chaeyeon07177%2FIMG_8691.JPG&type=sc960_832'>
+            {% endif %}
             &nbsp;
-          {{ user.username }}
+            {{ user.username }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/accounts/logout/">Log Out</a>
